@@ -56,7 +56,7 @@ export function Header() {
       <header ref={headerRef} className={"header" + (scrolled ? " scrolled" : "") + (open ? " open" : "")} id="header">
         <div className="wrap header-bar">
           <a href="#home" className="wordmark" onClick={(e) => go(e, "home")}>
-            Provincie Barbershop<span className="dot">.</span>
+            <span className="demo-badge">Demo</span> Provincie Barbershop<span className="dot">.</span>
           </a>
 
           <nav className="nav" id="nav" aria-label={t("Hoofdnavigatie", "Main navigation")}>
