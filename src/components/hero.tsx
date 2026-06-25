@@ -1,8 +1,10 @@
 "use client";
 
 import { Fragment, useEffect, useRef, type CSSProperties } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import { useLang } from "@/lib/i18n";
-import { useFinePointer, usePrefersReducedMotion } from "@/lib/hooks";
+import { useFinePointer, useMobileHero, usePrefersReducedMotion } from "@/lib/hooks";
 import { smoothScrollTo } from "@/lib/scroll";
 
 type Word = { w: string; em?: boolean };
@@ -16,6 +18,7 @@ export function Hero() {
   const { lang, t } = useLang();
   const fine = useFinePointer();
   const reduced = usePrefersReducedMotion();
+  const isMobile = useMobileHero();
 
   const heroRef = useRef<HTMLElement>(null);
   const h1Ref = useRef<HTMLHeadingElement>(null);
@@ -71,19 +74,55 @@ export function Hero() {
       </div>
 
       <div className="wrap">
-        {/* Mobile only: Provincie wordmark at the top, in the empty space above
-            the address. mix-blend lighten drops the PNG's black into the hero. */}
-        <div className="hero-logo md:hidden fade-up" aria-hidden="true" />
+        {/* Mobile only: clean Provincie wordmark — transparent PNG, no blend-mode needed.
+            Choreographed entrance: logo first, then address, headline, CTA, meta. */}
+        <motion.div
+          className="hero-logo md:hidden"
+          aria-hidden="true"
+          initial={reduced ? false : { opacity: 0, scale: 0.92 }}
+          animate={reduced ? false : { opacity: 1, scale: 1 }}
+          transition={{ duration: 0.55, ease: [0.2, 0.7, 0.2, 1], delay: 0.08 }}
+        >
+          <Image
+            src="/images/barber-provinicie-logo-clean.png"
+            alt=""
+            width={260}
+            height={120}
+            priority
+            className="hero-logo-img"
+          />
+        </motion.div>
 
-        <p className="label fade-up d1">Provinciestraat 226 · 2018 Antwerpen</p>
+        {/* Address — mobile: framer-motion stagger; desktop: original fade-up CSS */}
+        {isMobile ? (
+          <motion.p
+            className="label"
+            initial={reduced ? false : { opacity: 0, y: 14 }}
+            animate={reduced ? false : { opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: [0.2, 0.7, 0.2, 1], delay: 0.52 }}
+          >
+            Provinciestraat 226 · 2018 Antwerpen
+          </motion.p>
+        ) : (
+          <p className="label fade-up d1">Provinciestraat 226 · 2018 Antwerpen</p>
+        )}
 
-        <h1 ref={h1Ref} className="kinetic" aria-label={words.map((x) => x.w).join(" ")}>
+        {/* Headline — mobile: delayed word-rise (logo settles first); desktop: original timing */}
+        <h1
+          ref={h1Ref}
+          className="kinetic"
+          aria-label={words.map((x) => x.w).join(" ")}
+        >
           {words.map((word, i) => (
             <Fragment key={`${lang}-${i}`}>
               <span className="word-mask" aria-hidden="true">
                 <span
                   className={"word" + (word.em ? " em" : "")}
-                  style={{ "--wd": `${(0.7 + i * 0.06).toFixed(2)}s` } as CSSProperties}
+                  style={{
+                    "--wd": isMobile
+                      ? `${(0.72 + i * 0.06).toFixed(2)}s`
+                      : `${(0.7 + i * 0.06).toFixed(2)}s`,
+                  } as CSSProperties}
                 >
                   {word.w}
                 </span>
@@ -93,31 +132,73 @@ export function Hero() {
           ))}
         </h1>
 
-        <div className="hero-cta fade-up d3">
-          <span className="cta-pulse">
-            <a
-              href="#book"
-              className="btn btn-primary btn-shine"
-              onClick={(e) => {
-                e.preventDefault();
-                smoothScrollTo("book", reduced);
-              }}
-            >
-              {t("Boek je afspraak", "Book your spot")}
-              <span className="arrow" aria-hidden="true">
-                →
-              </span>
-            </a>
-          </span>
-        </div>
+        {/* CTA — mobile: fade+slide-up; desktop: original fade-up CSS */}
+        {isMobile ? (
+          <motion.div
+            className="hero-cta"
+            initial={reduced ? false : { opacity: 0, y: 18 }}
+            animate={reduced ? false : { opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.2, 0.7, 0.2, 1], delay: 1.1 }}
+          >
+            <span className="cta-pulse">
+              <a
+                href="#book"
+                className="btn btn-primary btn-shine"
+                onClick={(e) => {
+                  e.preventDefault();
+                  smoothScrollTo("book", reduced);
+                }}
+              >
+                {t("Boek je afspraak", "Book your spot")}
+                <span className="arrow" aria-hidden="true">
+                  →
+                </span>
+              </a>
+            </span>
+          </motion.div>
+        ) : (
+          <div className="hero-cta fade-up d3">
+            <span className="cta-pulse">
+              <a
+                href="#book"
+                className="btn btn-primary btn-shine"
+                onClick={(e) => {
+                  e.preventDefault();
+                  smoothScrollTo("book", reduced);
+                }}
+              >
+                {t("Boek je afspraak", "Book your spot")}
+                <span className="arrow" aria-hidden="true">
+                  →
+                </span>
+              </a>
+            </span>
+          </div>
+        )}
 
-        <div className="hero-meta fade-up d4">
-          <span>
-            <b>{t("Knippen vanaf", "Cuts from")}</b> €12
-          </span>
-          <span>{t("Di–Za · 10–19u", "Tue–Sat · 10–19h")}</span>
-          <span>{t("Wandel binnen of boek vooraf", "Walk in or book ahead")}</span>
-        </div>
+        {/* Meta — mobile: delayed fade; desktop: original fade-up CSS */}
+        {isMobile ? (
+          <motion.div
+            className="hero-meta"
+            initial={reduced ? false : { opacity: 0 }}
+            animate={reduced ? false : { opacity: 1 }}
+            transition={{ duration: 0.65, ease: [0.2, 0.7, 0.2, 1], delay: 1.3 }}
+          >
+            <span>
+              <b>{t("Knippen vanaf", "Cuts from")}</b> €12
+            </span>
+            <span>{t("Di–Za · 10–19u", "Tue–Sat · 10–19h")}</span>
+            <span>{t("Wandel binnen of boek vooraf", "Walk in or book ahead")}</span>
+          </motion.div>
+        ) : (
+          <div className="hero-meta fade-up d4">
+            <span>
+              <b>{t("Knippen vanaf", "Cuts from")}</b> €12
+            </span>
+            <span>{t("Di–Za · 10–19u", "Tue–Sat · 10–19h")}</span>
+            <span>{t("Wandel binnen of boek vooraf", "Walk in or book ahead")}</span>
+          </div>
+        )}
 
         <div className="scroll-cue fade-up d4" aria-hidden="true">
           <span>Scroll</span>

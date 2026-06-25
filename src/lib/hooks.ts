@@ -26,6 +26,19 @@ export function useFinePointer(): boolean {
   return fine;
 }
 
+/** True while the viewport is ≤ 767 px (the mobile hero breakpoint). */
+export function useMobileHero(): boolean {
+  const [mobile, setMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const on = () => setMobile(mq.matches);
+    on();
+    mq.addEventListener?.("change", on);
+    return () => mq.removeEventListener?.("change", on);
+  }, []);
+  return mobile;
+}
+
 /**
  * Faithful port of the original IntersectionObserver: adds `.in` to every
  * `.reveal`, `.stagger`, and `.divider` element once it scrolls into view.

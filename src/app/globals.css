@@ -433,21 +433,22 @@ body::after{
       var(--paper) 100%
     );
   }
-  /* Provincie wordmark at the top of the stack. The PNG is a cream wordmark
-     on solid black; mix-blend lighten makes the black vanish into the hero
-     so only the wordmark shows — no visible box, no fragile cropping. */
+  /* Provincie wordmark — clean transparent PNG, no blend-mode needed.
+     The wrapper centres the logo and provides vertical rhythm. */
   .hero-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 178px;
-    margin: 0 0 10px;
-    background-image: url(/images/barber-provincie-hero-mobile.png);
-    background-repeat: no-repeat;
-    background-position: center 50%;
-    background-size: auto 415%;
-    mix-blend-mode: lighten;
-    /* feather the PNG's rectangular black backdrop into the hero */
-    -webkit-mask-image: radial-gradient(125% 74% at 50% 50%, #000 50%, transparent 82%);
-    mask-image: radial-gradient(125% 74% at 50% 50%, #000 50%, transparent 82%);
+    padding: 0 var(--pad);
+    margin: 0 0 18px;
+  }
+  .hero-logo-img {
+    display: block;
+    width: clamp(180px, 58vw, 260px);
+    height: auto;
+    /* Cream/white wordmark on dark hero — brighten very slightly so it pops */
+    filter: brightness(1.08);
   }
   .hero-meta { margin-top: 34px; }
   /* no scroll cue on mobile — touch users don't need the hint */
