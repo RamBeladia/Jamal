@@ -11,9 +11,14 @@ export function Gallery() {
   const [dims, setDims] = useState({ w: 440, h: 308 });
   useEffect(() => {
     const calc = () => {
-      const w = Math.min(440, Math.max(244, window.innerWidth - 72));
+      const mobile = window.matchMedia("(max-width: 767px)").matches;
+      const vw = window.innerWidth;
+      // mobile: smaller cards + more side margin so the fan fits the screen
+      const w = mobile
+        ? Math.min(296, Math.max(208, vw - 116))
+        : Math.min(440, Math.max(244, vw - 72));
       setDims((prev) => {
-        const h = Math.round(w * 0.7);
+        const h = Math.round(w * (mobile ? 0.66 : 0.7));
         return prev.w === w && prev.h === h ? prev : { w, h };
       });
     };
