@@ -406,34 +406,39 @@ body::after{
    ============================================================ */
 @media (max-width: 767px) {
   .hero {
-    /* size to content — no forced full-viewport height, so there is no dead
-       black gap between the compact hero content and the Booking section */
-    min-height: auto;
+    /* fill the viewport below the sticky header so the black covers the whole
+       first screen; Booking sits fully below the fold. The -48px keeps Booking
+       just past the fold even with the ~57px in-flow header. */
+    min-height: calc(100vh - 48px);
+    min-height: calc(100svh - 48px);
     background: #0d0d0d;
-    display: block;
-    /* generous bottom padding gives the fade room to blend into Booking
-       without washing over the meta text above it */
-    padding: clamp(16px, 2.5vh, 28px) 0 clamp(92px, 13vh, 124px);
+    /* center the content as a group so the logo + text breathe in the space
+       instead of clumping at the top; asymmetric bottom padding lifts the
+       group into the upper-middle and leaves room for the gradient below */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(20px, 4vh, 44px) 0 clamp(96px, 15vh, 150px);
   }
   /* reset the padding-top from the previous wrap-based approach */
   .hero .wrap { padding-top: 0; }
   /* skip the curtain wipe on mobile — instant reveal, no flash */
   .hero-curtain { display: none; }
   .hero::before, .hero::after { display: none; }
-  /* soft fade that blends the black hero seam into the paper Booking section —
-     fixed height so it only covers the bottom padding, not the content */
+  /* smooth medium fade — a single cream alpha-ramp (no muddy black↔cream mix)
+     melts the black hero into the paper Booking section at the bottom */
   .hero-fade {
     position: absolute;
     left: 0; right: 0; bottom: 0;
-    height: clamp(80px, 13vh, 120px);
+    height: clamp(130px, 20vh, 170px);
     z-index: 0;
     pointer-events: none;
     background: linear-gradient(
       to bottom,
-      rgba(13,13,13,0) 0%,
-      rgba(13,13,13,0) 30%,
-      rgba(241,240,237,.5) 78%,
-      var(--paper) 95%,
+      rgba(241,240,237,0) 0%,
+      rgba(241,240,237,0) 42%,
+      rgba(241,240,237,.55) 78%,
+      rgba(241,240,237,.9) 92%,
       var(--paper) 100%
     );
   }
@@ -444,7 +449,8 @@ body::after{
     align-items: center;
     width: 100%;
     padding: 0 var(--pad);
-    margin: 0 0 16px;
+    /* large gap separates the logo cluster from the text cluster below */
+    margin: 0 0 clamp(40px, 8vh, 88px);
   }
   .hero-logo-img {
     display: block;
@@ -456,11 +462,12 @@ body::after{
   .hero h1 {
     color: var(--paper);
     font-size: clamp(1.95rem, 8.5vw, 2.6rem);
-    margin-top: 10px;
+    /* tight to the address above it — they read as one unit */
+    margin-top: 12px;
   }
   .hero h1 em, .kinetic .word.em { color: var(--brass-soft); }
-  .hero-cta { margin-top: 22px; }
-  .hero-meta { margin-top: 18px; }
+  .hero-cta { margin-top: clamp(28px, 4.5vh, 42px); }
+  .hero-meta { margin-top: clamp(22px, 3.2vh, 32px); }
   /* no scroll cue on mobile */
   .scroll-cue { display: none; }
   .hero-sub { color: rgba(241,240,237,.72); }
