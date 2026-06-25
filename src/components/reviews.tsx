@@ -226,8 +226,8 @@ export function Reviews() {
     <section className="section reviews" id="reviews">
       <div className="wrap">
         <div className="section-head reveal">
-          <span className="label">{t("Beoordelingen", "Reviews")}</span>
-          <h2>{t("Wat de klanten zeggen", "What clients say")}</h2>
+          <span className="label">{t("Reviews", "Reviews")}</span>
+          <h2>{t("Wat de mensen zeggen", "Straight from the clients")}</h2>
         </div>
       </div>
 
@@ -239,8 +239,8 @@ export function Reviews() {
         tabIndex={0}
         aria-keyshortcuts="ArrowLeft ArrowRight"
         aria-label={t(
-          "Klantbeoordelingen — sleep of gebruik de pijltjestoetsen om te bladeren",
-          "Customer reviews — drag or use the arrow keys to browse",
+          "Klantreviews — sleep of gebruik de pijltjestoetsen om te bladeren",
+          "Reviews from real clients — drag or use the arrow keys to browse",
         )}
       >
         <div className="reviews-track stagger">
@@ -278,7 +278,7 @@ export function Reviews() {
 
       <div className="wrap">
         <a className="reviews-all" href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener">
-          {t("Lees alle reviews op Google", "See all reviews on Google")}
+          {t("Alle reviews op Google", "Read all reviews on Google")}
           <span className="arrow" aria-hidden="true">
             →
           </span>

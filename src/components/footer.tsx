@@ -13,7 +13,7 @@ export function Footer() {
         <div className="footer-top reveal">
           <div>
             <span className="label">Provincie Barbershop</span>
-            <h3>{t("Tot in de zaak.", "See you at the shop.")}</h3>
+            <h3>{t("Tot snel op de Provinciestraat.", "We'll see you on Provinciestraat.")}</h3>
           </div>
           <div>
             <span className="label">Contact</span>
@@ -36,14 +36,14 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <span className="label">Open</span>
+            <span className="label">{t("Openingsuren", "Hours")}</span>
             <ul className="f-list">
               <li>
                 <span className="k">{t("Dinsdag — Zaterdag", "Tuesday — Saturday")}</span>
                 10:00 – 19:00
               </li>
               <li>
-                <span className="k">{t("Zondag & Maandag", "Sunday & Monday")}</span>
+                <span className="k">{t("Zon- & Maandag", "Sunday & Monday")}</span>
                 <span>{t("Gesloten", "Closed")}</span>
               </li>
             </ul>

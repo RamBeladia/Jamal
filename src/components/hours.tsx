@@ -14,8 +14,8 @@ export function Hours() {
     <section className="section hours-sec" id="hours">
       <div className="wrap">
         <div className="section-head reveal">
-          <span className="label">{t("Uren & ligging", "Hours & where")}</span>
-          <h2>{t("Wanneer & waar", "When & where")}</h2>
+          <span className="label">{t("Uren & adres", "Hours & location")}</span>
+          <h2>{t("Kom langs", "Come find us")}</h2>
         </div>
 
         <div className="hl-grid reveal">
@@ -56,7 +56,7 @@ export function Hours() {
           {/* Google Maps embed pinned to Provinciestraat 226, 2018 Antwerpen */}
           <div className="map">
             <iframe
-              title={t("Kaart — Provinciestraat 226, 2018 Antwerpen", "Map — Provinciestraat 226, 2018 Antwerp")}
+              title={t("Kaart — Provinciestraat 226, Antwerpen", "Map — Provinciestraat 226, Antwerp")}
               src={CONTACT.mapSrc}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

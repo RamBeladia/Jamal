@@ -49,12 +49,12 @@ export function Booking() {
       <span id="services" aria-hidden="true" className="anchor-offset" />
       <div className="wrap">
         <div className="section-head reveal">
-          <span className="label">{t("Diensten & boeken", "Services & booking")}</span>
-          <h2>{t("Kies je dienst, boek meteen", "Pick your service, book on the spot")}</h2>
+          <span className="label">{t("Boeken", "Book")}</span>
+          <h2>{t("Kies je dienst en boek direct", "Pick your service and book right now")}</h2>
           <p className="book-intro">
             {t(
-              "Eerlijke prijzen, netjes op het bord. Wat je ziet, betaal je — kies wat je nodig hebt en een moment dat past.",
-              "Honest prices, right there on the board. What you see is what you pay — pick what you need and a time that suits you.",
+              "Geen verrassingen. Wat je ziet, betaal je — kies gewoon wat je nodig hebt en een moment dat uitkomt.",
+              "No surprises. What you see is what you pay — just pick what you need and a time that works.",
             )}
           </p>
         </div>
@@ -80,8 +80,8 @@ export function Booking() {
           {/* STEP 1 */}
           {!confirmed && step === 1 && (
             <div className="panel panel-anim" role="group" aria-label={t("Stap 1: kies een dienst", "Step 1: choose a service")}>
-              <h3>{t("Wat mag het zijn?", "What can we do for you?")}</h3>
-              <p className="panel-hint">{t("Tik op wat je vandaag zoekt.", "Tap what you're after today.")}</p>
+              <h3>{t("Wat wordt het vandaag?", "What's it going to be?")}</h3>
+              <p className="panel-hint">{t("Kies hieronder wat je zoekt.", "Pick what you're after below.")}</p>
               <div className="svc-opts">
                 {SERVICES.map((s) => (
                   <button
@@ -107,11 +107,11 @@ export function Booking() {
           {/* STEP 2 */}
           {!confirmed && step === 2 && (
             <div className="panel panel-anim" role="group" aria-label={t("Stap 2: kies dag en uur", "Step 2: choose day and time")}>
-              <h3>{t("Wanneer komt het uit?", "When suits you?")}</h3>
+              <h3>{t("Wanneer past het jou?", "When works for you?")}</h3>
               <p className="panel-hint">
                 {t(
-                  "Open van dinsdag tot zaterdag. Grijze dagen zijn we dicht.",
-                  "Open Tuesday to Saturday. Greyed-out days we're closed.",
+                  "Open van dinsdag tot zaterdag. Grijze dagen zijn we toe.",
+                  "Open Tuesday to Saturday. Greyed-out days the shop is closed.",
                 )}
               </p>
               <div className="day-grid" role="group" aria-label={t("Dagen", "Days")}>
@@ -173,8 +173,8 @@ export function Booking() {
           {/* STEP 3 */}
           {!confirmed && step === 3 && (
             <div className="panel panel-anim" role="group" aria-label={t("Stap 3: bevestig", "Step 3: confirm")}>
-              <h3>{t("Klopt alles?", "All good?")}</h3>
-              <p className="panel-hint">{t("Even nakijken en bevestigen.", "Quick check, then confirm.")}</p>
+              <h3>{t("Alles in orde?", "Does this look right?")}</h3>
+              <p className="panel-hint">{t("Controleer even je keuze en bevestig.", "Have a quick look, then lock it in.")}</p>
               <div className="summary">
                 <div className="summary-row">
                   <span className="k">{t("Dienst", "Service")}</span>
@@ -197,7 +197,7 @@ export function Booking() {
                   {t("Bevestig afspraak", "Confirm booking")}
                 </button>
               </div>
-              <p className="book-note">{t("Demo — er wordt nog niks echt vastgelegd.", "Demo — nothing's actually booked yet.")}</p>
+              <p className="book-note">{t("Demo — er wordt nog niks echt vastgelegd. Bel of app voor een echte afspraak.", "Demo only — nothing's actually booked yet. Call or message to reserve your spot.")}</p>
             </div>
           )}
 
@@ -209,11 +209,11 @@ export function Booking() {
                   <path d="M20 6 9 17l-5-5" />
                 </svg>
               </div>
-              <h3>{t("Tot snel in de zaak!", "See you soon!")}</h3>
+              <h3>{t("Tot snel bij Jamal!", "See you soon!")}</h3>
               <p>
                 {t(
-                  "Je afspraak staat genoteerd. We houden de stoel voor je vrij.",
-                  "Your appointment's noted. We'll keep the chair for you.",
+                  "Afspraak gemaakt. De stoel staat voor je klaar.",
+                  "You're booked in. The chair's waiting.",
                 )}
               </p>
               <div className="done-card">

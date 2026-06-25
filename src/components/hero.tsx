@@ -8,8 +8,8 @@ import { smoothScrollTo } from "@/lib/scroll";
 type Word = { w: string; em?: boolean };
 
 const HEADLINE: Record<"nl" | "en", Word[]> = {
-  nl: [{ w: "Scherp" }, { w: "geknipt," }, { w: "zonder", em: true }, { w: "gedoe.", em: true }],
-  en: [{ w: "A" }, { w: "clean" }, { w: "cut," }, { w: "no", em: true }, { w: "fuss.", em: true }],
+  nl: [{ w: "Tijd" }, { w: "voor" }, { w: "een" }, { w: "knipbeurt?", em: true }],
+  en: [{ w: "Need" }, { w: "a" }, { w: "Haircut?", em: true }],
 };
 
 export function Hero() {
@@ -93,14 +93,7 @@ export function Hero() {
           ))}
         </h1>
 
-        <p className="hero-sub fade-up d3">
-          {t(
-            "Eén man, één stoel, en alle tijd voor jou. Wip binnen of boek vooraf — jij kiest.",
-            "One man, one chair, and all the time you need. Drop in or book ahead — your call.",
-          )}
-        </p>
-
-        <div className="hero-cta fade-up d4">
+        <div className="hero-cta fade-up d3">
           <span className="cta-pulse">
             <a
               href="#book"
@@ -116,27 +109,17 @@ export function Hero() {
               </span>
             </a>
           </span>
-          <a
-            href="#book"
-            className="btn btn-ghost"
-            onClick={(e) => {
-              e.preventDefault();
-              smoothScrollTo("book", reduced);
-            }}
-          >
-            {t("Bekijk de prijzen", "See the prices")}
-          </a>
         </div>
 
-        <div className="hero-meta fade-up d5">
+        <div className="hero-meta fade-up d4">
           <span>
-            <b>{t("Knippen vanaf", "Cuts from")}</b> €15
+            <b>{t("Knippen vanaf", "Cuts from")}</b> €12
           </span>
           <span>{t("Di–Za · 10–19u", "Tue–Sat · 10–19h")}</span>
           <span>{t("Wandel binnen of boek vooraf", "Walk in or book ahead")}</span>
         </div>
 
-        <div className="scroll-cue fade-up d5" aria-hidden="true">
+        <div className="scroll-cue fade-up d4" aria-hidden="true">
           <span>Scroll</span>
           <span className="track" />
         </div>

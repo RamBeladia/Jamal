@@ -41,31 +41,31 @@ export function Gallery() {
     {
       id: "interior",
       title: t("In de zaak", "Inside the shop"),
-      description: t("De vertrouwde stoel op de Provinciestraat.", "The trusted chair on Provinciestraat."),
+      description: t("Thuis op de Provinciestraat, al jaren.", "Home on Provinciestraat, for years."),
       imageSrc: "/photos/shop-interior.jpg",
     },
     {
       id: "fade",
       title: t("Verse fade", "Fresh fade"),
-      description: t("Strak afgewerkt, tot in de details.", "Sharp finish, down to the detail."),
+      description: t("Strak, clean en tot in de puntjes.", "Clean lines, sharp finish."),
       imageSrc: "/photos/gallery-fade.jpg",
     },
     {
       id: "cut1",
-      title: t("Vakwerk", "Craftsmanship"),
-      description: t("Jaren ervaring in elke knipbeurt.", "Years of experience in every cut."),
+      title: t("Vakwerk", "The craft"),
+      description: t("Elke knipbeurt met de tijd en aandacht die ze verdient.", "Every cut gets the time and attention it deserves."),
       imageSrc: "/photos/shop-cut-1.jpg",
     },
     {
       id: "kids",
       title: t("Kids Cut", "Kids Cut"),
-      description: t("Geduldig, ook voor de allerkleinsten.", "Patient, even with the little ones."),
+      description: t("Geduldig en rustig, ook voor de allerkleinsten.", "Calm and patient, even with the little ones."),
       imageSrc: "/photos/gallery-kids.jpg",
     },
     {
       id: "cut2",
       title: t("Klaar voor de spiegel", "Ready for the mirror"),
-      description: t("Buitenkomen met een goed gevoel.", "Walk out feeling sharp."),
+      description: t("Naar buiten met een goed gevoel — dat is het idee.", "Walk out feeling like yourself, only better."),
       imageSrc: "/photos/shop-cut-2.jpg",
     },
   ];
@@ -74,12 +74,12 @@ export function Gallery() {
     <section className="section gallery" id="gallery">
       <div className="wrap">
         <div className="section-head reveal">
-          <span className="label">{t("In de zaak", "Inside")}</span>
-          <h2>{t("Een blik binnen", "A look inside")}</h2>
+          <span className="label">{t("De zaak", "The shop")}</span>
+          <h2>{t("Een kijkje in de zaak", "A look at what we get up to")}</h2>
           <p className="svc-intro">
             {t(
-              "Sleep door de stapel of laat ze vanzelf draaien — een blik op het werk en de zaak.",
-              "Drag through the stack or let it turn on its own — a glimpse of the work and the shop.",
+              "Sleep door de stapel of laat ze vanzelf draaien — een eerlijke blik op de zaak en het werk.",
+              "Drag through the stack or let it spin — a straight look at the shop and the work we do.",
             )}
           </p>
         </div>
