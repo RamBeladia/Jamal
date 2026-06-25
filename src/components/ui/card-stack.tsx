@@ -169,13 +169,14 @@ export function CardStack<T extends CardStackItem>({
         tabIndex={0}
         onKeyDown={onKeyDown}
       >
-        {/* background wash / spotlight (unique feel) */}
+        {/* background wash / spotlight (unique feel) — blur is expensive on
+            mobile during card transitions, so drop it below md */}
         <div
-          className="pointer-events-none absolute inset-x-0 top-6 mx-auto h-48 w-[70%] rounded-full bg-black/5 blur-3xl dark:bg-white/5"
+          className="pointer-events-none absolute inset-x-0 top-6 mx-auto h-48 w-[70%] rounded-full bg-black/5 max-md:hidden md:blur-3xl dark:bg-white/5"
           aria-hidden="true"
         />
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-40 w-[76%] rounded-full bg-black/10 blur-3xl dark:bg-black/30"
+          className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-40 w-[76%] rounded-full bg-black/10 max-md:hidden md:blur-3xl dark:bg-black/30"
           aria-hidden="true"
         />
 

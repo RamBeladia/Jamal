@@ -398,6 +398,7 @@ body::after{
    ============================================================ */
 @media (max-width: 767px) {
   .hero {
+    min-height: 100vh;       /* fallback for older Android without svh */
     min-height: 100svh;
     background: var(--ink);
     display: flex;
@@ -452,7 +453,30 @@ body::after{
   .scroll-cue .track { background: rgba(241,240,237,.15); }
   .btn-ghost { color: var(--paper); border-color: rgba(241,240,237,.22); }
   .btn-ghost:hover { border-color: var(--brass); background: rgba(176,141,62,.1); }
+
+  /* ---- MOBILE SMOOTHNESS: strip always-on GPU costs (max smoothness) ----
+     These run continuously on normal mobile (only reduced-motion disabled
+     them before). Killing them removes scroll-jank and battery drain.
+     Desktop (>=768px) keeps every effect. */
+
+  /* sticky header: backdrop-filter blur repaints every scroll frame */
+  .header {
+    background: rgba(241,240,237,.96);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  /* fixed full-viewport grain with mix-blend repaints on every scroll frame */
+  body::after { display: none; }
+  /* infinite hero decorations — not needed on the dark mobile hero */
+  .hero-ambient, .hero-ring { display: none; }
+  .hero-ambient i { animation: none; }
+  /* infinite button effects (breathing glow + shine sweep) */
+  .cta-pulse::before { animation: none; opacity: .45; transform: none; }
+  .btn-shine::after { display: none; }
 }
+
+/* zero-height secondary scroll anchor (e.g. #services -> merged book section) */
+.anchor-offset { display: block; height: 0; scroll-margin-top: 84px; }
 
 /* ============================================================
    SERVICES & PRICING

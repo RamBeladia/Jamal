@@ -12,11 +12,24 @@ export function Gallery() {
   useEffect(() => {
     const calc = () => {
       const w = Math.min(440, Math.max(244, window.innerWidth - 72));
-      setDims({ w, h: Math.round(w * 0.7) });
+      setDims((prev) => {
+        const h = Math.round(w * 0.7);
+        return prev.w === w && prev.h === h ? prev : { w, h };
+      });
     };
     calc();
-    window.addEventListener("resize", calc);
-    return () => window.removeEventListener("resize", calc);
+    // debounce: mobile address-bar show/hide fires many resize events during
+    // scroll — without this, each one re-renders the CardStack mid-scroll.
+    let tid: ReturnType<typeof setTimeout>;
+    const onResize = () => {
+      clearTimeout(tid);
+      tid = setTimeout(calc, 150);
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      clearTimeout(tid);
+      window.removeEventListener("resize", onResize);
+    };
   }, []);
 
   const items: CardStackItem[] = [

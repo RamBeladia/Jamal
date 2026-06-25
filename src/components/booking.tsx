@@ -45,14 +45,16 @@ export function Booking() {
 
   return (
     <section className="section book" id="book">
+      {/* secondary anchor so any lingering #services link still lands here */}
+      <span id="services" aria-hidden="true" className="anchor-offset" />
       <div className="wrap">
         <div className="section-head reveal">
-          <span className="label">{t("Boeken", "Book")}</span>
-          <h2>{t("Boek je afspraak", "Book your spot")}</h2>
+          <span className="label">{t("Diensten & boeken", "Services & booking")}</span>
+          <h2>{t("Kies je dienst, boek meteen", "Pick your service, book on the spot")}</h2>
           <p className="book-intro">
             {t(
-              "In een halve minuut geregeld. Kies wat je nodig hebt en een moment dat past.",
-              "Done in half a minute. Pick what you need and a time that suits you.",
+              "Eerlijke prijzen, netjes op het bord. Wat je ziet, betaal je — kies wat je nodig hebt en een moment dat past.",
+              "Honest prices, right there on the board. What you see is what you pay — pick what you need and a time that suits you.",
             )}
           </p>
         </div>

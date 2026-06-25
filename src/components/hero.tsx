@@ -117,11 +117,11 @@ export function Hero() {
             </a>
           </span>
           <a
-            href="#services"
+            href="#book"
             className="btn btn-ghost"
             onClick={(e) => {
               e.preventDefault();
-              smoothScrollTo("services", reduced);
+              smoothScrollTo("book", reduced);
             }}
           >
             {t("Bekijk de prijzen", "See the prices")}

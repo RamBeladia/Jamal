@@ -67,10 +67,9 @@ export const CONTACT = {
 
 export const NAV = [
   { id: "home", nl: "Home", en: "Home" },
-  { id: "services", nl: "Diensten", en: "Services" },
-  { id: "story", nl: "Verhaal", en: "Story" },
-  { id: "reviews", nl: "Reviews", en: "Reviews" },
   { id: "book", nl: "Boeken", en: "Book" },
+  { id: "reviews", nl: "Reviews", en: "Reviews" },
+  { id: "story", nl: "Verhaal", en: "Story" },
   { id: "hours", nl: "Uren", en: "Hours" },
 ];
 

@@ -1,7 +1,6 @@
 import { Header } from "@/components/header";
 import SmoothScrollHero from "@/components/ui/smooth-scroll-hero";
 import { Hero } from "@/components/hero";
-import { Services } from "@/components/services";
 import { Divider } from "@/components/divider";
 import { Gallery } from "@/components/gallery";
 import { Reviews } from "@/components/reviews";
@@ -23,15 +22,13 @@ export default function Page() {
           finalClipPercentage={75}
         />
         <Hero />
-        <Services />
+        <Booking />
         <Divider />
         <Gallery />
         <Divider />
         <Reviews />
         <Divider />
         <Story />
-        <Divider />
-        <Booking />
         <Divider />
         <Hours />
       </main>
