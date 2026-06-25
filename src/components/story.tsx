@@ -1,17 +1,26 @@
 "use client";
 
+import { useRef } from "react";
+import { useInView } from "framer-motion";
 import { useLang } from "@/lib/i18n";
+import { RevealText } from "@/components/ui/reveal-text";
 
 export function Story() {
   const { lang, t } = useLang();
+  const headlineRef = useRef<HTMLDivElement>(null);
+  // run the kinetic wordmark once it scrolls into view
+  const inView = useInView(headlineRef, { once: true, margin: "0px 0px -20% 0px" });
+
   return (
     <section className="section story" id="story">
-      <span className="watermark" aria-hidden="true">
-        Provincie
-      </span>
       <div className="wrap">
         <div className="section-head reveal" style={{ marginBottom: 0 }}>
           <span className="label">{t("Verhaal", "Story")}</span>
+        </div>
+
+        {/* Kinetic wordmark — hover a letter to reveal a real shop photo through it */}
+        <div ref={headlineRef} className="story-headline" aria-label="Provincie Barbershop">
+          <RevealText text="PROVINCIE" start={inView} />
         </div>
 
         {/* PLACEHOLDER COPY: replace once Jamal shares his real story. No fabricated reviews. */}

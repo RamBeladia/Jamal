@@ -159,13 +159,11 @@ body::after{
 .stagger.in>*:nth-child(6){transition-delay:.35s}
 .stagger.in>*:nth-child(7){transition-delay:.42s}
 
-@keyframes reveal-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fade-in-scroll{from{opacity:0}to{opacity:1}}
-@supports (animation-timeline: view()){
-  .reveal{animation:reveal-in linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
-  .review-card{animation:reveal-in linear both;animation-timeline:view();animation-range:entry 5% entry 55%}
-  .gallery .frame{animation:fade-in-scroll linear both;animation-timeline:view();animation-range:entry 0% entry 45%}
-}
+/* NOTE: the previous `@supports (animation-timeline: view())` reveal layer was
+   removed — with body{overflow-x:hidden} it turned the body into an x-axis scroll
+   container, which broke view()'s vertical resolution in Chrome and pinned some
+   elements at opacity:0. The IntersectionObserver `.in` path (useScrollReveal)
+   now drives every .reveal / .stagger uniformly and reliably across browsers. */
 
 /* ============================================================
    HEADER  (sticky, shrinks on scroll)
@@ -432,6 +430,8 @@ body::after{
   content:"";position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(80% 60% at 50% 0%, rgba(18,18,18,.04), transparent 60%);
 }
+/* 3D fanned card-stack stage (replaces the old static photo grid) */
+.gallery-stage{position:relative;z-index:1;max-width:var(--maxw);margin:clamp(24px,4vw,42px) auto 0;padding-inline:var(--pad)}
 .gallery-grid{display:grid;gap:clamp(20px,4vw,34px);grid-template-columns:1fr;max-width:780px;margin-inline:auto;perspective:1100px}
 @media (min-width:620px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:768px) and (max-width:1023px){
@@ -523,6 +523,8 @@ body::after{
 .story .wrap{position:relative;z-index:1}
 .story .label{color:var(--warm)}
 .story .label::before{background:var(--brass)}
+/* kinetic hover-reveal wordmark (RevealText) */
+.story-headline{margin:clamp(10px,2.5vw,22px) 0 clamp(18px,3vw,30px);overflow:hidden;line-height:.92}
 .story-body{
   font-family:var(--display);font-weight:400;font-size:clamp(1.45rem,4vw,2.2rem);
   line-height:1.42;max-width:26ch;margin-top:18px;color:var(--ink);

@@ -1,68 +1,56 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
 import { useLang } from "@/lib/i18n";
-import { useFinePointer, usePrefersReducedMotion } from "@/lib/hooks";
-
-const PHOTOS = [
-  {
-    src: "/photos/gallery-fade.jpg",
-    altNl: "Strakke fade, geknipt bij Provincie Barbershop",
-    altEn: "Sharp fade, cut at Provincie Barbershop",
-    capNl: "Verse fade",
-    capEn: "Fresh fade",
-  },
-  {
-    src: "/photos/gallery-kids.jpg",
-    altNl: "Kinderknipbeurt met lijntje, Provincie Barbershop",
-    altEn: "Kids haircut with a line, Provincie Barbershop",
-    capNl: "Kids Cut",
-    capEn: "Kids Cut",
-  },
-];
+import { CardStack, type CardStackItem } from "@/components/ui/card-stack";
 
 export function Gallery() {
   const { t } = useLang();
-  const fine = useFinePointer();
-  const reduced = usePrefersReducedMotion();
-  const gridRef = useRef<HTMLDivElement>(null);
 
-  // 3D tilt + cursor-tracked sheen sweep (desktop / fine-pointer only)
+  // responsive card sizing so the fan never overwhelms small screens
+  const [dims, setDims] = useState({ w: 440, h: 308 });
   useEffect(() => {
-    if (!fine || reduced) return;
-    const grid = gridRef.current;
-    if (!grid) return;
-    const frames = Array.from(grid.querySelectorAll<HTMLElement>(".frame"));
-    const cleanups: Array<() => void> = [];
-    frames.forEach((frame) => {
-      const sheen = frame.querySelector<HTMLElement>(".sheen");
-      const onMove = (e: MouseEvent) => {
-        const r = frame.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width;
-        const py = (e.clientY - r.top) / r.height;
-        const ry = (px - 0.5) * 10;
-        const rx = (0.5 - py) * 8;
-        frame.style.transform = `translateY(-7px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
-        if (sheen) {
-          sheen.style.setProperty("--sx", (px * 100).toFixed(1) + "%");
-          sheen.style.setProperty("--sy", (py * 100).toFixed(1) + "%");
-          sheen.style.opacity = "0.6";
-        }
-      };
-      const onLeave = () => {
-        frame.style.transform = "";
-        if (sheen) sheen.style.opacity = "0";
-      };
-      frame.addEventListener("mousemove", onMove);
-      frame.addEventListener("mouseleave", onLeave);
-      cleanups.push(() => {
-        frame.removeEventListener("mousemove", onMove);
-        frame.removeEventListener("mouseleave", onLeave);
-      });
-    });
-    return () => cleanups.forEach((c) => c());
-  }, [fine, reduced]);
+    const calc = () => {
+      const w = Math.min(440, Math.max(244, window.innerWidth - 72));
+      setDims({ w, h: Math.round(w * 0.7) });
+    };
+    calc();
+    window.addEventListener("resize", calc);
+    return () => window.removeEventListener("resize", calc);
+  }, []);
+
+  const items: CardStackItem[] = [
+    {
+      id: "interior",
+      title: t("In de zaak", "Inside the shop"),
+      description: t("De vertrouwde stoel op de Provinciestraat.", "The trusted chair on Provinciestraat."),
+      imageSrc: "/photos/shop-interior.jpg",
+    },
+    {
+      id: "fade",
+      title: t("Verse fade", "Fresh fade"),
+      description: t("Strak afgewerkt, tot in de details.", "Sharp finish, down to the detail."),
+      imageSrc: "/photos/gallery-fade.jpg",
+    },
+    {
+      id: "cut1",
+      title: t("Vakwerk", "Craftsmanship"),
+      description: t("Jaren ervaring in elke knipbeurt.", "Years of experience in every cut."),
+      imageSrc: "/photos/shop-cut-1.jpg",
+    },
+    {
+      id: "kids",
+      title: t("Kids Cut", "Kids Cut"),
+      description: t("Geduldig, ook voor de allerkleinsten.", "Patient, even with the little ones."),
+      imageSrc: "/photos/gallery-kids.jpg",
+    },
+    {
+      id: "cut2",
+      title: t("Klaar voor de spiegel", "Ready for the mirror"),
+      description: t("Buitenkomen met een goed gevoel.", "Walk out feeling sharp."),
+      imageSrc: "/photos/shop-cut-2.jpg",
+    },
+  ];
 
   return (
     <section className="section gallery" id="gallery">
@@ -70,25 +58,30 @@ export function Gallery() {
         <div className="section-head reveal">
           <span className="label">{t("In de zaak", "Inside")}</span>
           <h2>{t("Een blik binnen", "A look inside")}</h2>
+          <p className="svc-intro">
+            {t(
+              "Sleep door de stapel of laat ze vanzelf draaien — een blik op het werk en de zaak.",
+              "Drag through the stack or let it turn on its own — a glimpse of the work and the shop.",
+            )}
+          </p>
         </div>
+      </div>
 
-        <div className="gallery-grid stagger" ref={gridRef}>
-          {PHOTOS.map((p) => (
-            <figure className="frame" key={p.src}>
-              <div className="photo-frame">
-                <Image
-                  className="photo"
-                  src={p.src}
-                  alt={t(p.altNl, p.altEn)}
-                  fill
-                  sizes="(max-width:620px) 92vw, 360px"
-                />
-                <span className="sheen" aria-hidden="true" />
-              </div>
-              <figcaption>{t(p.capNl, p.capEn)}</figcaption>
-            </figure>
-          ))}
-        </div>
+      <div className="gallery-stage reveal">
+        <CardStack
+          items={items}
+          initialIndex={2}
+          maxVisible={5}
+          cardWidth={dims.w}
+          cardHeight={dims.h}
+          overlap={0.5}
+          spreadDeg={42}
+          activeLiftPx={24}
+          autoAdvance
+          intervalMs={3200}
+          pauseOnHover
+          showDots
+        />
       </div>
     </section>
   );
