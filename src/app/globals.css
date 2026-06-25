@@ -406,31 +406,34 @@ body::after{
    ============================================================ */
 @media (max-width: 767px) {
   .hero {
-    min-height: 100vh;
-    min-height: 100svh;
+    /* size to content — no forced full-viewport height, so there is no dead
+       black gap between the compact hero content and the Booking section */
+    min-height: auto;
     background: #0d0d0d;
     display: block;
-    /* header is in document flow so padding-top = gap above the logo only */
-    padding: clamp(16px, 2.5vh, 28px) 0 clamp(48px, 6vh, 72px);
+    /* generous bottom padding gives the fade room to blend into Booking
+       without washing over the meta text above it */
+    padding: clamp(16px, 2.5vh, 28px) 0 clamp(92px, 13vh, 124px);
   }
   /* reset the padding-top from the previous wrap-based approach */
   .hero .wrap { padding-top: 0; }
   /* skip the curtain wipe on mobile — instant reveal, no flash */
   .hero-curtain { display: none; }
   .hero::before, .hero::after { display: none; }
-  /* soft fade from the black hero into the paper Services section */
+  /* soft fade that blends the black hero seam into the paper Booking section —
+     fixed height so it only covers the bottom padding, not the content */
   .hero-fade {
     position: absolute;
     left: 0; right: 0; bottom: 0;
-    height: 50%;
+    height: clamp(80px, 13vh, 120px);
     z-index: 0;
     pointer-events: none;
     background: linear-gradient(
       to bottom,
       rgba(13,13,13,0) 0%,
-      rgba(13,13,13,0) 46%,
-      rgba(241,240,237,.55) 84%,
-      var(--paper) 94%,
+      rgba(13,13,13,0) 30%,
+      rgba(241,240,237,.5) 78%,
+      var(--paper) 95%,
       var(--paper) 100%
     );
   }
