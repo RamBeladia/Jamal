@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type CSSProperties } from "react";
+import { Fragment, useEffect, useRef, type CSSProperties } from "react";
 import { useLang } from "@/lib/i18n";
 import { useFinePointer, usePrefersReducedMotion } from "@/lib/hooks";
 import { smoothScrollTo } from "@/lib/scroll";
@@ -58,19 +58,6 @@ export function Hero() {
 
   return (
     <section className="hero" id="home" ref={heroRef}>
-      {/* Mobile only: Provincie logo ghosted at low opacity behind all content */}
-      <div
-        className="absolute inset-0 md:hidden pointer-events-none"
-        aria-hidden="true"
-        style={{
-          backgroundImage: "url(/images/barber-provincie-hero-mobile.png)",
-          backgroundSize: "82%",
-          backgroundPosition: "center 38%",
-          backgroundRepeat: "no-repeat",
-          opacity: 0.13,
-          zIndex: 0,
-        }}
-      />
       <div className="hero-curtain" aria-hidden="true" />
       <div className="hero-ambient" ref={ambientRef} aria-hidden="true">
         <i />
@@ -84,19 +71,25 @@ export function Hero() {
       </div>
 
       <div className="wrap">
+        {/* Mobile only: Provincie wordmark at the top, in the empty space above
+            the address. mix-blend lighten drops the PNG's black into the hero. */}
+        <div className="hero-logo md:hidden fade-up" aria-hidden="true" />
+
         <p className="label fade-up d1">Provinciestraat 226 · 2018 Antwerpen</p>
 
         <h1 ref={h1Ref} className="kinetic" aria-label={words.map((x) => x.w).join(" ")}>
           {words.map((word, i) => (
-            <span className="word-mask" key={`${lang}-${i}`} aria-hidden="true">
-              <span
-                className={"word" + (word.em ? " em" : "")}
-                style={{ "--wd": `${(0.7 + i * 0.06).toFixed(2)}s` } as CSSProperties}
-              >
-                {word.w}
+            <Fragment key={`${lang}-${i}`}>
+              <span className="word-mask" aria-hidden="true">
+                <span
+                  className={"word" + (word.em ? " em" : "")}
+                  style={{ "--wd": `${(0.7 + i * 0.06).toFixed(2)}s` } as CSSProperties}
+                >
+                  {word.w}
+                </span>
               </span>
               {i < words.length - 1 ? " " : ""}
-            </span>
+            </Fragment>
           ))}
         </h1>
 

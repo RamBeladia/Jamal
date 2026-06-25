@@ -421,9 +421,25 @@ body::after{
       var(--paper) 100%
     );
   }
-  /* tighten the lower stack so the scroll cue stays clear of the fade */
+  /* Provincie wordmark at the top of the stack. The PNG is a cream wordmark
+     on solid black; mix-blend lighten makes the black vanish into the hero
+     so only the wordmark shows — no visible box, no fragile cropping. */
+  .hero-logo {
+    width: 100%;
+    height: 124px;
+    margin: 0 0 4px;
+    background-image: url(/images/barber-provincie-hero-mobile.png);
+    background-repeat: no-repeat;
+    background-position: center 50%;
+    background-size: auto 360%;
+    mix-blend-mode: lighten;
+    /* feather the PNG's rectangular black backdrop into the hero */
+    -webkit-mask-image: radial-gradient(105% 64% at 50% 50%, #000 38%, transparent 73%);
+    mask-image: radial-gradient(105% 64% at 50% 50%, #000 38%, transparent 73%);
+  }
   .hero-meta { margin-top: 34px; }
-  .scroll-cue { margin-top: 26px; }
+  /* no scroll cue on mobile — touch users don't need the hint */
+  .scroll-cue { display: none; }
   .hero h1 { color: var(--paper); }
   .hero h1 em, .kinetic .word.em { color: var(--brass-soft); }
   .hero-sub { color: rgba(241,240,237,.72); }
