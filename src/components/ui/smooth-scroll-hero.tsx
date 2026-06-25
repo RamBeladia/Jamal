@@ -87,7 +87,7 @@ const SmoothScrollHero: React.FC<iISmoothScrollHeroProps> = ({
 	return (
 		<div
 			style={{ height: `calc(${scrollHeight}px + 100vh)` }}
-			className="relative w-full"
+			className="relative w-full hidden md:block"
 		>
 			<SmoothScrollHeroBackground
 				scrollHeight={scrollHeight}
