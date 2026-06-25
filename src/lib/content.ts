@@ -60,7 +60,7 @@ export const CONTACT = {
   phoneDisplay: "+32 488 58 29 80",
   phoneHref: "tel:+32488582980",
   instagram: "@provinciebarbershop",
-  instagramHref: "#", // PLACEHOLDER: replace with the real Instagram profile URL
+  instagramHref: "https://www.instagram.com/provinciebarbershop",
   mapSrc:
     "https://www.google.com/maps?q=Provinciestraat%20226,%202018%20Antwerpen,%20Belgium&z=16&output=embed",
 };

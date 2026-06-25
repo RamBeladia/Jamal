@@ -26,10 +26,9 @@ export function Footer() {
                 <span className="k">{t("Adres", "Address")}</span>
                 Provinciestraat 226, 2018 Antwerpen
               </li>
-              {/* INSTAGRAM PLACEHOLDER: replace href with the real Instagram profile URL */}
               <li>
                 <span className="k">Instagram</span>
-                <a href={CONTACT.instagramHref} rel="noopener">
+                <a href={CONTACT.instagramHref} rel="noopener noreferrer" target="_blank">
                   {CONTACT.instagram}
                 </a>
               </li>
