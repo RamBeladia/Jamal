@@ -1,4 +1,5 @@
 import { Header } from "@/components/header";
+import SmoothScrollHero from "@/components/ui/smooth-scroll-hero";
 import { Hero } from "@/components/hero";
 import { Services } from "@/components/services";
 import { Divider } from "@/components/divider";
@@ -14,6 +15,13 @@ export default function Page() {
     <>
       <Header />
       <main id="main">
+        <SmoothScrollHero
+          scrollHeight={1500}
+          desktopImage="/images/barber-provincie-hero-desktop.png"
+          mobileImage="/images/barber-provincie-hero-mobile.png"
+          initialClipPercentage={25}
+          finalClipPercentage={75}
+        />
         <Hero />
         <Services />
         <Divider />
