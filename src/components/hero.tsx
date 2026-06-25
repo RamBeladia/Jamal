@@ -58,6 +58,19 @@ export function Hero() {
 
   return (
     <section className="hero" id="home" ref={heroRef}>
+      {/* Mobile only: Provincie logo ghosted at low opacity behind all content */}
+      <div
+        className="absolute inset-0 md:hidden pointer-events-none"
+        aria-hidden="true"
+        style={{
+          backgroundImage: "url(/images/barber-provincie-hero-mobile.png)",
+          backgroundSize: "82%",
+          backgroundPosition: "center 38%",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.13,
+          zIndex: 0,
+        }}
+      />
       <div className="hero-curtain" aria-hidden="true" />
       <div className="hero-ambient" ref={ambientRef} aria-hidden="true">
         <i />

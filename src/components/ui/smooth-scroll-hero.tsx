@@ -27,41 +27,7 @@ function useIsMobile() {
 	return mobile;
 }
 
-// Mobile: auto-plays the reveal on mount — no scroll required
-const MobileHeroBackground: React.FC<Pick<iISmoothScrollHeroProps, "mobileImage" | "initialClipPercentage" | "finalClipPercentage">> = ({
-	mobileImage,
-	initialClipPercentage,
-	finalClipPercentage,
-}) => {
-	const ease = [0.2, 0.7, 0.2, 1] as const;
-	const duration = 1.4;
-
-	const initialClip = `polygon(${initialClipPercentage}% ${initialClipPercentage}%, ${finalClipPercentage}% ${initialClipPercentage}%, ${finalClipPercentage}% ${finalClipPercentage}%, ${initialClipPercentage}% ${finalClipPercentage}%)`;
-	const finalClip = `polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)`;
-
-	return (
-		<motion.div
-			className="relative h-screen w-full bg-black overflow-hidden"
-			initial={{ clipPath: initialClip }}
-			animate={{ clipPath: finalClip }}
-			transition={{ duration, ease }}
-		>
-			<motion.div
-				className="absolute inset-0"
-				initial={{ backgroundSize: "170%" }}
-				animate={{ backgroundSize: "100%" }}
-				transition={{ duration, ease }}
-				style={{
-					backgroundImage: `url(${mobileImage})`,
-					backgroundPosition: "center",
-					backgroundRepeat: "no-repeat",
-				}}
-			/>
-		</motion.div>
-	);
-};
-
-// Desktop: original scroll-driven reveal
+// Desktop: original scroll-driven clip-path + zoom reveal
 const SmoothScrollHeroBackground: React.FC<iISmoothScrollHeroProps> = ({
 	scrollHeight,
 	desktopImage,
@@ -114,26 +80,22 @@ const SmoothScrollHero: React.FC<iISmoothScrollHeroProps> = ({
 }) => {
 	const isMobile = useIsMobile();
 
+	// On mobile the Hero section becomes the full-screen hero (with dim logo bg).
+	// This component only renders its scroll-driven reveal on desktop.
+	if (isMobile) return null;
+
 	return (
 		<div
-			style={{ height: isMobile ? "100vh" : `calc(${scrollHeight}px + 100vh)` }}
+			style={{ height: `calc(${scrollHeight}px + 100vh)` }}
 			className="relative w-full"
 		>
-			{isMobile ? (
-				<MobileHeroBackground
-					mobileImage={mobileImage}
-					initialClipPercentage={initialClipPercentage}
-					finalClipPercentage={finalClipPercentage}
-				/>
-			) : (
-				<SmoothScrollHeroBackground
-					scrollHeight={scrollHeight}
-					desktopImage={desktopImage}
-					mobileImage={mobileImage}
-					initialClipPercentage={initialClipPercentage}
-					finalClipPercentage={finalClipPercentage}
-				/>
-			)}
+			<SmoothScrollHeroBackground
+				scrollHeight={scrollHeight}
+				desktopImage={desktopImage}
+				mobileImage={mobileImage}
+				initialClipPercentage={initialClipPercentage}
+				finalClipPercentage={finalClipPercentage}
+			/>
 		</div>
 	);
 };

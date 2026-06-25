@@ -391,6 +391,35 @@ body::after{
 @keyframes hero-curtain{to{-webkit-clip-path:inset(100% 0 0 0);clip-path:inset(100% 0 0 0)}}
 
 /* ============================================================
+   HERO — MOBILE DARK VARIANT
+   On mobile the SmoothScrollHero is hidden; the Hero section
+   becomes the full-screen entry point with the Provincie logo
+   ghosted behind all content at ~13% opacity.
+   ============================================================ */
+@media (max-width: 767px) {
+  .hero {
+    min-height: 100svh;
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero::before { display: none; }
+  .hero h1 { color: var(--paper); }
+  .hero h1 em, .kinetic .word.em { color: var(--brass-soft); }
+  .hero-sub { color: rgba(241,240,237,.72); }
+  .hero .label { color: var(--brass-soft); }
+  .hero .label::before { background: var(--brass); }
+  .hero-meta { color: rgba(241,240,237,.55); }
+  .hero-meta b { color: var(--paper); }
+  .hero-meta span+span::before { background: var(--brass); }
+  .scroll-cue { color: rgba(241,240,237,.38); }
+  .scroll-cue .track { background: rgba(241,240,237,.15); }
+  .btn-ghost { color: var(--paper); border-color: rgba(241,240,237,.22); }
+  .btn-ghost:hover { border-color: var(--brass); background: rgba(176,141,62,.1); }
+}
+
+/* ============================================================
    SERVICES & PRICING
    ============================================================ */
 .services{background:linear-gradient(180deg,var(--paper) 0%,var(--paper-2) 100%)}
