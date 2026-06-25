@@ -148,6 +148,10 @@ export function Hero() {
           <span className="track" />
         </div>
       </div>
+
+      {/* Mobile only: soft gradient that melts the black hero into the
+          paper-colored Services section below — no hard black/white seam */}
+      <div className="hero-fade md:hidden" aria-hidden="true" />
     </section>
   );
 }
