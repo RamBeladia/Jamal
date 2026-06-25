@@ -406,19 +406,17 @@ body::after{
    ============================================================ */
 @media (max-width: 767px) {
   .hero {
-    min-height: 100vh;       /* fallback for older Android without svh */
+    min-height: 100vh;
     min-height: 100svh;
-    /* #0d0d0d matches the PNG's black exactly so mix-blend lighten has nothing
-       to reveal at dark pixels — no mismatched-tone seam around the logo */
     background: #0d0d0d;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;   /* sit content high, logo near the top */
-    padding: 0;
+    display: block;
+    /* header is in document flow so padding-top = gap above the logo only */
+    padding: clamp(16px, 2.5vh, 28px) 0 clamp(48px, 6vh, 72px);
   }
-  .hero .wrap {
-    padding-top: clamp(72px, 9.5vh, 100px);
-  }
+  /* reset the padding-top from the previous wrap-based approach */
+  .hero .wrap { padding-top: 0; }
+  /* skip the curtain wipe on mobile — instant reveal, no flash */
+  .hero-curtain { display: none; }
   .hero::before, .hero::after { display: none; }
   /* soft fade from the black hero into the paper Services section */
   .hero-fade {
@@ -436,56 +434,50 @@ body::after{
       var(--paper) 100%
     );
   }
-  /* Provincie wordmark — clean transparent PNG, no blend-mode needed.
-     The wrapper centres the logo and provides vertical rhythm. */
+  /* Provincie wordmark — centered, tight gap below before content */
   .hero-logo {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     padding: 0 var(--pad);
-    margin: 0 0 clamp(28px, 4vh, 48px);
+    margin: 0 0 16px;
   }
   .hero-logo-img {
     display: block;
-    width: clamp(180px, 58vw, 260px);
+    width: clamp(160px, 56vw, 240px);
     height: auto;
-    /* Cream/white wordmark on dark hero — brighten very slightly so it pops */
     filter: brightness(1.08);
   }
-  .hero-meta { margin-top: 34px; }
-  /* no scroll cue on mobile — touch users don't need the hint */
-  .scroll-cue { display: none; }
-  .hero h1 { color: var(--paper); }
+  /* headline — smaller on mobile so it wraps less and sits compact */
+  .hero h1 {
+    color: var(--paper);
+    font-size: clamp(1.95rem, 8.5vw, 2.6rem);
+    margin-top: 10px;
+  }
   .hero h1 em, .kinetic .word.em { color: var(--brass-soft); }
+  .hero-cta { margin-top: 22px; }
+  .hero-meta { margin-top: 18px; }
+  /* no scroll cue on mobile */
+  .scroll-cue { display: none; }
   .hero-sub { color: rgba(241,240,237,.72); }
   .hero .label { color: var(--brass-soft); }
   .hero .label::before { background: var(--brass); }
   .hero-meta { color: rgba(241,240,237,.55); }
   .hero-meta b { color: var(--paper); }
   .hero-meta span+span::before { background: var(--brass); }
-  .scroll-cue { color: rgba(241,240,237,.38); }
-  .scroll-cue .track { background: rgba(241,240,237,.15); }
   .btn-ghost { color: var(--paper); border-color: rgba(241,240,237,.22); }
   .btn-ghost:hover { border-color: var(--brass); background: rgba(176,141,62,.1); }
 
-  /* ---- MOBILE SMOOTHNESS: strip always-on GPU costs (max smoothness) ----
-     These run continuously on normal mobile (only reduced-motion disabled
-     them before). Killing them removes scroll-jank and battery drain.
-     Desktop (>=768px) keeps every effect. */
-
-  /* sticky header: backdrop-filter blur repaints every scroll frame */
+  /* ---- MOBILE SMOOTHNESS ---- */
   .header {
     background: rgba(241,240,237,.96);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
-  /* fixed full-viewport grain with mix-blend repaints on every scroll frame */
   body::after { display: none; }
-  /* infinite hero decorations — not needed on the dark mobile hero */
   .hero-ambient, .hero-ring { display: none; }
   .hero-ambient i { animation: none; }
-  /* infinite button effects (breathing glow + shine sweep) */
   .cta-pulse::before { animation: none; opacity: .45; transform: none; }
   .btn-shine::after { display: none; }
 }
