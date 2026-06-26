@@ -26,18 +26,45 @@ const mono = IBM_Plex_Mono({
   variable: "--font-mono",
 });
 
+const SITE_URL = "https://jamal-ram-personal-terminal.vercel.app";
+const SITE_TITLE = "Provincie Barbershop — Provinciestraat 226, Antwerpen";
+const SITE_DESC =
+  "Provincie Barbershop op de Provinciestraat in Antwerpen. Eerlijk, betaalbaar en zonder gedoe. Knippen vanaf €15. Boek je afspraak online.";
+
 export const metadata: Metadata = {
-  title: "Provincie Barbershop — Provinciestraat 226, Antwerpen",
-  description:
-    "Provincie Barbershop op de Provinciestraat in Antwerpen. Eerlijk, betaalbaar en zonder gedoe. Knippen vanaf €15. Boek je afspraak online.",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESC,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "nl_BE",
+    alternateLocale: "en_GB",
+    url: SITE_URL,
+    siteName: "Provincie Barbershop",
+    title: SITE_TITLE,
+    description: SITE_DESC,
+    images: [
+      {
+        url: "/images/barber-provincie-hero-desktop.png",
+        width: 1200,
+        height: 630,
+        alt: "Provincie Barbershop, Provinciestraat 226, Antwerpen",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESC,
+    images: ["/images/barber-provincie-hero-desktop.png"],
+  },
 };
 
 export const viewport: Viewport = {
   themeColor: "#121212",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

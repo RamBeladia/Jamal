@@ -36,3 +36,4 @@ desktop.ini
 
 # Claude Code session data
 .claude/
+.gstack/
