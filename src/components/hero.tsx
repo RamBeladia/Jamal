@@ -185,7 +185,7 @@ export function Hero() {
             transition={{ duration: 0.65, ease: [0.2, 0.7, 0.2, 1], delay: 1.3 }}
           >
             <span>
-              <b>{t("Knippen vanaf", "Cuts from")}</b> €15
+              <b>{t("Knippen vanaf", "Cuts from")}</b> €12
             </span>
             <span>{t("Di–Za · 10–19u", "Tue–Sat · 10–19h")}</span>
             <span>{t("Wandel binnen of boek vooraf", "Walk in or book ahead")}</span>
@@ -193,7 +193,7 @@ export function Hero() {
         ) : (
           <div className="hero-meta fade-up d4">
             <span>
-              <b>{t("Knippen vanaf", "Cuts from")}</b> €15
+              <b>{t("Knippen vanaf", "Cuts from")}</b> €12
             </span>
             <span>{t("Di–Za · 10–19u", "Tue–Sat · 10–19h")}</span>
             <span>{t("Wandel binnen of boek vooraf", "Walk in or book ahead")}</span>
