@@ -471,7 +471,13 @@ body::after{
   /* no scroll cue on mobile */
   .scroll-cue { display: none; }
   .hero-sub { color: rgba(241,240,237,.72); }
-  .hero .label { color: var(--brass-soft); }
+  .hero .label {
+    color: var(--brass-soft);
+    /* keep "PROVINCIESTRAAT 226 · 2018 ANTWERPEN" on one line down to 320px */
+    font-size: clamp(.58rem, 2.7vw, .72rem);
+    letter-spacing: .1em;
+    white-space: nowrap;
+  }
   .hero .label::before { background: var(--brass); }
   .hero-meta { color: rgba(241,240,237,.55); }
   .hero-meta b { color: var(--paper); }
