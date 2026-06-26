@@ -59,8 +59,8 @@ export const CONTACT = {
   city: "2018 Antwerpen, België",
   phoneDisplay: "+32 488 58 29 80",
   phoneHref: "tel:+32488582980",
-  instagram: "@provinciebarbershop",
-  instagramHref: "https://www.instagram.com/provinciebarbershop",
+  instagram: "@barber_jamal_03",
+  instagramHref: "https://www.instagram.com/barber_jamal_03/",
   mapSrc:
     "https://www.google.com/maps?q=Provinciestraat%20226,%202018%20Antwerpen,%20Belgium&z=16&output=embed",
 };
