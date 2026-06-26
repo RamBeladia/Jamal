@@ -425,23 +425,68 @@ body::after{
   /* skip the curtain wipe on mobile — instant reveal, no flash */
   .hero-curtain { display: none; }
   .hero::before, .hero::after { display: none; }
-  /* smooth medium fade — a single cream alpha-ramp (no muddy black↔cream mix)
-     melts the black hero into the paper Booking section at the bottom */
+  /* ---- LIVING SEAM: black hero <-> cream booking, bidirectional ----
+     Three inert layers route #0d0d0d through a warm brass midtone (never
+     a straight black->cream ramp, which goes muddy gray):
+     (A) .hero-fade        static warm ramp black->brass->paper (downward)
+     (B) .hero-fade::after  drifting/breathing brass aurora (the "alive" bit)
+     (C) .book::before      cream->black veil over the seam (upward) */
   .hero-fade {
     position: absolute;
     left: 0; right: 0; bottom: 0;
-    height: clamp(130px, 20vh, 170px);
+    height: clamp(150px, 24vh, 200px);   /* taller = longer, softer blend */
     z-index: 0;
     pointer-events: none;
+    overflow: visible;                    /* let the aurora bleed past the seam */
     background: linear-gradient(
       to bottom,
-      rgba(241,240,237,0) 0%,
-      rgba(241,240,237,0) 42%,
-      rgba(241,240,237,.55) 78%,
-      rgba(241,240,237,.9) 92%,
-      var(--paper) 100%
+      rgba(13,13,13,0)      0%,           /* pure black up top */
+      rgba(46,38,22,.45)   34%,           /* warm brass-brown haze, not gray */
+      rgba(176,141,62,.22) 56%,           /* faint brass glow mid-seam */
+      rgba(233,231,224,.62) 80%,          /* into paper-2 */
+      var(--paper)         100%           /* land on cream */
     );
   }
+  /* (B) the living layer — two brass pools panning + breathing over the seam.
+     screen blend = brass only ADDS light, never darkens to mud */
+  .hero-fade::after {
+    content: "";
+    position: absolute;
+    left: -25%; right: -25%;              /* wider than seam so pan reveals no edge */
+    bottom: -40px;                         /* bleed down into .book to bridge */
+    height: 150px;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: screen;
+    opacity: .55;
+    background:
+      radial-gradient(60% 80% at 30% 50%, rgba(205,167,88,.40), transparent 70%),
+      radial-gradient(55% 75% at 72% 45%, rgba(176,141,62,.30), transparent 72%);
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    will-change: background-position, opacity, transform;
+    animation:
+      seam-drift 18s ease-in-out infinite,
+      seam-breathe 9s ease-in-out infinite;
+  }
+  /* (C) upward treatment — dark brass-warmed veil on .book's top edge */
+  .book { position: relative; }
+  .book::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    top: -70px;                            /* reach up over the seam into the hero */
+    height: 130px;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(13,13,13,.55) 0%,               /* dark where it meets the hero */
+      rgba(46,38,22,.30) 38%,              /* warm brass-brown midpoint */
+      rgba(233,231,224,0) 100%            /* dissolve into cream */
+    );
+  }
+  .book > * { position: relative; z-index: 1; }
   /* Provincie wordmark — centered, tight gap below before content */
   .hero-logo {
     display: flex;
@@ -496,6 +541,28 @@ body::after{
   .hero-ambient i { animation: none; }
   .cta-pulse::before { animation: none; opacity: .45; transform: none; }
   .btn-shine::after { display: none; }
+}
+
+/* Living-seam motion (mobile hero <-> booking). The aurora lives on
+   .hero-fade::after, which only renders on mobile (.hero-fade is md:hidden). */
+@keyframes seam-drift {
+  0%   { background-position:   0% 50%, 100% 50%; transform: translateY(0); }
+  50%  { background-position: 100% 50%,   0% 50%; transform: translateY(-3px); }
+  100% { background-position:   0% 50%, 100% 50%; transform: translateY(0); }
+}
+@keyframes seam-breathe {
+  0%, 100% { opacity: .38; }
+  50%      { opacity: .62; }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* freeze the aurora at a pleasing centered mid-glow — still reads as an
+     intentional brass-lit seam, just static */
+  .hero-fade::after {
+    animation: none;
+    opacity: .42;
+    transform: none;
+    background-position: 50% 50%, 50% 50%;
+  }
 }
 
 /* zero-height secondary scroll anchor (e.g. #services -> merged book section) */
