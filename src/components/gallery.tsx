@@ -65,7 +65,7 @@ export function Gallery() {
     {
       id: "cut2",
       title: t("Klaar voor de spiegel", "Ready for the mirror"),
-      description: t("Naar buiten met een goed gevoel — dat is het idee.", "Walk out feeling like yourself, only better."),
+      description: t("Naar buiten met een goed gevoel. Dat is het idee.", "Walk out feeling like yourself, only better."),
       imageSrc: "/photos/shop-cut-2.jpg",
     },
   ];
@@ -78,8 +78,8 @@ export function Gallery() {
           <h2>{t("Een kijkje in de zaak", "A look at what we get up to")}</h2>
           <p className="svc-intro">
             {t(
-              "Sleep door de stapel of laat ze vanzelf draaien — een eerlijke blik op de zaak en het werk.",
-              "Drag through the stack or let it spin — a straight look at the shop and the work we do.",
+              "Sleep door de stapel of laat ze vanzelf draaien. Een eerlijke blik op de zaak en het werk.",
+              "Drag through the stack or let it spin. A straight look at the shop and the work we do.",
             )}
           </p>
         </div>

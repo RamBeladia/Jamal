@@ -26,13 +26,13 @@ export function Story() {
         <p className="story-body reveal">
           {lang === "nl" ? (
             <>
-              Jamal runt Provincie Barbershop al jaren vanuit dezelfde stoel op de Provinciestraat. Geen overbodige fratsen, geen wachttijden van een uur —{" "}
-              <em>gewoon vakwerk, eerlijk geprijsd</em>, door iemand die zijn stiel door en door kent en er elke dag zijn beste werk van maakt.
+              Jamal runt Provincie Barbershop al jaren vanuit dezelfde stoel op de Provinciestraat. Geen overbodige fratsen, geen wachttijden van een uur.{" "}
+              <em>Gewoon vakwerk, eerlijk geprijsd</em>, door iemand die zijn stiel kent en er elke dag zijn beste werk van maakt.
             </>
           ) : (
             <>
-              Jamal has been running Provincie Barbershop from the same chair on Provinciestraat for years. No fuss, no inflated ego —{" "}
-              <em>just solid craft, honestly priced</em>, from someone who knows exactly what he&apos;s doing and shows up every day to prove it.
+              Jamal has been running Provincie Barbershop from the same chair on Provinciestraat for years. No fuss, no inflated ego.{" "}
+              <em>Just solid craft at honest prices</em>, from someone who knows what he&apos;s doing and shows up every day to prove it.
             </>
           )}
         </p>

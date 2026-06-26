@@ -239,8 +239,8 @@ export function Reviews() {
         tabIndex={0}
         aria-keyshortcuts="ArrowLeft ArrowRight"
         aria-label={t(
-          "Klantreviews — sleep of gebruik de pijltjestoetsen om te bladeren",
-          "Reviews from real clients — drag or use the arrow keys to browse",
+          "Klantreviews. Sleep of gebruik de pijltjestoetsen om te bladeren.",
+          "Reviews from real clients. Drag or use the arrow keys to browse.",
         )}
       >
         <div className="reviews-track stagger">

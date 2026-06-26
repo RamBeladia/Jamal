@@ -53,8 +53,8 @@ export function Booking() {
           <h2>{t("Kies je dienst en boek direct", "Pick your service and book right now")}</h2>
           <p className="book-intro">
             {t(
-              "Geen verrassingen. Wat je ziet, betaal je — kies gewoon wat je nodig hebt en een moment dat uitkomt.",
-              "No surprises. What you see is what you pay — just pick what you need and a time that works.",
+              "Geen verrassingen. Wat je ziet, betaal je. Kies wat je nodig hebt en een moment dat uitkomt.",
+              "No surprises. What you see is what you pay. Pick what you need and a time that works.",
             )}
           </p>
         </div>
@@ -197,7 +197,7 @@ export function Booking() {
                   {t("Bevestig afspraak", "Confirm booking")}
                 </button>
               </div>
-              <p className="book-note">{t("Demo — er wordt nog niks echt vastgelegd. Bel of app voor een echte afspraak.", "Demo only — nothing's actually booked yet. Call or message to reserve your spot.")}</p>
+              <p className="book-note">{t("Demo. Er wordt nog niks vastgelegd, dus bel of app voor een echte afspraak.", "Demo only. Nothing's booked yet, so call or message to reserve your spot.")}</p>
             </div>
           )}
 
