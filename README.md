@@ -1,6 +1,6 @@
 # Provincie Barbershop — Next.js
 
-A single-page site for **Provincie Barbershop** (Jamal Ali · Provinciestraat 226, 2018 Antwerpen),
+A single-page site for **Provincie Barbershop** (Jamal Alli · Provinciestraat 226, 2018 Antwerpen),
 migrated from a single static `index.html` to **Next.js 14 (App Router) + Tailwind CSS + shadcn/ui**,
 structured for **zero-config deployment on Vercel**.
 

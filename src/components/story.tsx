@@ -37,7 +37,7 @@ export function Story() {
           )}
         </p>
         <p className="story-tag reveal">
-          <b>Jamal Ali</b> — <span>{t("barbier & eigenaar", "barber & owner")}</span>
+          <b>Jamal Alli</b> — <span>{t("barbier & eigenaar", "barber & owner")}</span>
         </p>
       </div>
     </section>
