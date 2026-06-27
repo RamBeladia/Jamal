@@ -6,7 +6,7 @@ import { useLang } from "@/lib/i18n";
 export function LangToggle() {
   const { lang, setLang, t } = useLang();
   return (
-    <div className="lang" data-lang={lang} role="group" aria-label={t("Taal", "Language")}>
+    <div className="lang" data-lang={lang} role="group" aria-label={t("Taal", "Language")} translate="no">
       <button
         className={"lang-btn" + (lang === "nl" ? " active" : "")}
         data-lang="nl"

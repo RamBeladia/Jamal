@@ -69,6 +69,10 @@ html{
   scroll-behavior:smooth;
   scroll-padding-top:84px;
   -webkit-text-size-adjust:100%;
+  /* clip (not hidden, so sticky header + vertical scroll are untouched): keeps the
+     transformed gallery card-fan from widening the layout viewport, which let mobile
+     pinch-zoom out to a tiny page with empty space on the right */
+  overflow-x:clip;
 }
 body{
   margin:0;
