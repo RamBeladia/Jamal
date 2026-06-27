@@ -36,6 +36,10 @@ export const metadata: Metadata = {
   title: SITE_TITLE,
   description: SITE_DESC,
   alternates: { canonical: "/" },
+  // The site ships its own NL/EN toggle, so machine-translation only mangles it
+  // (Chrome was auto-translating the Dutch page into a half-finished English).
+  // Tell Google/Chrome not to offer or apply translation — our toggle is authoritative.
+  other: { google: "notranslate" },
   openGraph: {
     type: "website",
     locale: "nl_BE",
@@ -69,7 +73,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="nl" className={`${display.variable} ${body.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="nl" translate="no" className={`${display.variable} ${body.variable} ${mono.variable}`} suppressHydrationWarning>
       <body>
         {/* enable the .js-gated reveal/headline hidden states before first paint */}
         <script dangerouslySetInnerHTML={{ __html: "try{document.documentElement.classList.add('js')}catch(e){}" }} />
