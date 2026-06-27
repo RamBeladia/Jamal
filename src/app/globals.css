@@ -316,6 +316,7 @@ body::after{
 .hero .label{color:var(--warm)}
 .hero .label::before{background:var(--brass)}
 .hero h1{
+  display:block;
   color:var(--ink);font-size:clamp(2.8rem,10vw,5.6rem);font-weight:600;
   letter-spacing:-.03em;margin:20px 0 0;max-width:15ch;
 }
